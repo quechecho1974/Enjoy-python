@@ -10,15 +10,17 @@ import pandas as pd
 import matplotlib.pyplot as ply
 
 ds2014 = pd.read_csv('2014_Financial_Data.csv')
-ds2014_nan = ds2014.fillna(0)
-del ds2014_nan['Unnamed: 0']
-del ds2014_nan['Sector']
+ds2014_nan = ds2014.fillna(0)#plus de NAN dans le fichier csv
+del ds2014_nan['Unnamed: 0']#suppresion de la colonne avec des données en str et conservation de cette colonne dans 
+#le fichier d'origine
+del ds2014_nan['Sector']#suppresion de la colonne avec des données en str et conservation de cette colonne dans 
+#le fichier d'origine
 float_col = ds2014_nan.select_dtypes(include=['float64']) # This will select float columns only
 # list(float_col.columns.values)
 for col in float_col.columns.values:
                 ds2014_nan[col] = ds2014_nan[col].astype('int64')
-
-
+#muy importante cambiar el tipo de datos . Si no se pone en int64 no se puede crear la matriz de confusion
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ds2014_nan
 len(ds2014_nan)
 ds2014_nan.head(2)
@@ -52,14 +54,6 @@ ds1415.fillna(0)
 del ds1415['2016 PRICE VAR [%]']
 ds1415
 
-Big_DS_14_15 = ds2014.append(ds2015, ignore_index = True)
-Big_DS_14_16 = Big_DS_14_15.append(ds2016, ignore_index = True)
-
-Big_DS_14_17 = Big_DS_14_16.append(ds2017, ignore_index = True)
-
-Big_DS_14_18 = Big_DS_14_17.append(ds2018, ignore_index = True)
-
-Big_full = Big_DS_14_18.fillna(0)
 
 Xa = ds1415.iloc[:, 0:223].values
 ya = ds1415.iloc[:,222].values
